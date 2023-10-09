@@ -14,6 +14,6 @@
 
 
 // function shuffle(deck)){
-//    huffles deck and sets it to computer or player
+//    shuffles deck and sets it to computer or player
 //    return shuffled deck
 // }
