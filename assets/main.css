@@ -1,3 +1,37 @@
-.playertitle {
+/* Shared styles for player and CPU elements */
+.playerdeck, .cpudeck, .playerpile, .cpupile {
+    width: 200px;
+    height: 300px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.profilepicture, .cpuprofilepicture {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+/* Player-specific styles */
+.playertitle, .playbutton {
     color: blue;
+}
+
+.playerdeck, .profilepicture, .playerpile {
+    background-color: blue;
+}
+
+/* CPU-specific styles */
+.cputitle {
+    color: green;
+}
+
+.cpudeck, .cpuprofilepicture, .cpupile {
+    background-color: green;
+}
+
+/* Body styles */
+body {
+    background-color: darkgrey;
 }
