@@ -1,19 +1,30 @@
-// const playerDeckEl =
-// const startBtn = the html start button;
+// Establish the deck
+const suits = ["♠", "♥", "♦", "♣"];
+const values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+const deck = [];
 
-// playerDeck = [all card array]
-// computerDeck = [all the cards]
+for (let suit of suits) {
+    for (let value of values) {
+        deck.push({ suit, value });
+    }
+}
 
-// startBtn.addEventListener('click,', function()){
-//     the game to start (startgame)
-//     the start button to disappear
-// }
+// Function to shuffle the deck
+function shuffleDeck(deck) {
+    for (let i = deck.length - 1; i > 0; i--) {
+        const j =Math.floor(Math.random() * (i + 1));
+        [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+    return deck;
+}  
+
 
 // function startGame()
 //     shuffle both decks
 
-
-// function shuffle(deck)){
-//    shuffles deck and sets it to computer or player
-//    return shuffled deck
+// playBtn.addEventListener('click,', function()){
+//     the game to start (startgame)
+//     the start button to disappear
 // }
+
+

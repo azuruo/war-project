@@ -13,9 +13,12 @@
     border-radius: 10px;
 }
 
+.playbtn {
+    color: blue
+}
 /* Player-specific styles */
-.playertitle, .playbutton {
-    color: blue;
+.playertitle {
+    color: blue
 }
 
 .playerdeck, .profilepicture, .playerpile {
