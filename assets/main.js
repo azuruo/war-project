@@ -1,65 +1,112 @@
 // Establish the deck
-const suits = ["♠", "♥", "♦", "♣"];
-const values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+const suits = ['♠', '♥', '♦', '♣'];
+const values = [
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '10',
+  'J',
+  'Q',
+  'K',
+  'A',
+];
 const deck = [];
 
 for (let suit of suits) {
-    for (let value of values) {
-        deck.push({ suit, value });
-    }
+  for (let value of values) {
+    deck.push({ suit, value });
+  }
 }
 
 // Function to shuffle the deck
 function shuffleDeck(deck) {
-    for (let i = deck.length - 1; i > 0; i--) {
-        const j =Math.floor(Math.random() * (i + 1));
-        [deck[i], deck[j]] = [deck[j], deck[i]];
+  for (let i = deck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [deck[i], deck[j]] = [deck[j], deck[i]];
+  }
+  return deck;
+}
+
+// Function to deal cards to two players in alternating pattern
+const player1Hand = [];
+const player2Hand = [];
+
+for (let i = 0; i < deck.length; i++) {
+  if (i % 2 === 0) {
+    player1Hand.push(deck[i]);
+  } else {
+    player2Hand.push(deck[i]);
+  }
+}
+
+// Initialize game variables
+let roundsPlayed = 0;
+let wars = 0;
+let gameOver = false;
+
+// Add event listener for the "Play Round" button
+const playButton = document.getElementById('playButton');
+playButton.addEventListener('click', playRound);
+
+// Play a round
+function playRound() {
+  if (gameOver) {
+    return;
+  }
+
+  const player1Card = player1Hand.shift();
+  const player2Card = player2Hand.shift();
+
+  // Compare cards and handle the outcome (win, tie, war)
+  // ...
+  function compareCards(player1Card, player2Card) {
+    if (player1Card.value > player2Card.value) {
+      player1Hand.push(player1Card, player2Card);
+    } else if (player1Card.value < player2Card.value) {
+      player2Hand.push(player1Card, player2Card);
+    } else {
+      initiateWar(player1Card, player2Card);
     }
-    return deck;
-}  
+  }
+  compareCards(player1Card, player2Card);
 
-// Deal function
+  roundsPlayed++;
 
+  // Update game state and check for a win condition
+  // ...
 
-// Round logic function
+  // Display the game state
+  // ...
+}
 
+// Check win condition
+function checkWinCondition() {
+  if (player1Hand.length === 0) {
+    gameOver = true;
+    // Display player 2 as the winner
+  } else if (player2Hand.length === 0) {
+    gameOver = true;
+    // Display player 1 as the winner
+  }
+}
 
+// Handle the "war" scenario
+function handleWar() {
+  wars++;
+  // Implement logic for resolving a war (placing cards in a pot, comparing, etc.)
+  // ...
+}
 
-// War Scenario:
-// If there's a tie in rank:
-//     Each player places three cards face down (as a "pot").
-//     Each player then places one card face up.
-//     Compare the face-up cards, and the player with the higher-ranked card wins all the cards in the "pot" and adds them to their hand.
-//     Continue this process until one player wins the war and takes all the cards.
+// Display game state
+function displayGameState() {
+  // Update the HTML to display the game state, including player hands, rounds played, wars, etc.
+  // ...
+}
 
-// Check Win Condition:
-
-//     After each round, check if one player has all the cards. If so, declare that player as the winner, and end the game.
-
-// Display Game State:
-
-//     Continuously update and display the game state, showing each player's hand and the cards played in the current round.
-
-// User Interaction:
-
-//     Implement user interface elements for players to start the game, see the current state, and interact with the game 
-// (e.g., clicking a "Play" button to play a round).
-// playBtn.addEventListener('click,', function()){
-//     the game to start (startgame)
-//     the start button to disappear
-// }
-
-// End Game:
-
-//     Once the game is over, display the winner and allow the option to restart or quit the game.
-
-// Error Handling:
-
-//     Implement error handling for edge cases, such as attempting to play when there are not enough cards left for a war.
-
-// Randomness:
-
-//     Ensure that the game uses proper randomness for shuffling and selecting cards.
-
-
-
+// Initialize the game
+// ...
