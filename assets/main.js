@@ -44,14 +44,9 @@ for (let i = 0; i < deck.length; i++) {
   }
 }
 
-// Initialize game variables
 let roundsPlayed = 0;
 let wars = 0;
 let gameOver = false;
-
-// Add event listener for the "Play Round" button
-const playButton = document.getElementById('playButton');
-playButton.addEventListener('click', playRound);
 
 // Play a round
 function playRound() {
@@ -62,8 +57,7 @@ function playRound() {
   const player1Card = player1Hand.shift();
   const player2Card = player2Hand.shift();
 
-  // Compare cards and handle the outcome (win, tie, war)
-  // ...
+  // Comparing card values to determine round winner
   function compareCards(player1Card, player2Card) {
     if (player1Card.value > player2Card.value) {
       player1Hand.push(player1Card, player2Card);
@@ -77,8 +71,8 @@ function playRound() {
 
   roundsPlayed++;
 
-  // Update game state and check for a win condition
-  // ...
+  updateGameState();
+  checkWinCondition();
 
   // Display the game state
   // ...
@@ -88,25 +82,59 @@ function playRound() {
 function checkWinCondition() {
   if (player1Hand.length === 0) {
     gameOver = true;
-    // Display player 2 as the winner
+    const displayWinner = document.getElementById('displayWinner');
+    displayWinner.textContent = 'You win!';
   } else if (player2Hand.length === 0) {
     gameOver = true;
-    // Display player 1 as the winner
+    const displayWinner = document.getElementById('displayWinner');
+    displayWinner.textContent = 'CPU wins!';
   }
 }
 
 // Handle the "war" scenario
-function handleWar() {
+function initiateWar() {
   wars++;
-  // Implement logic for resolving a war (placing cards in a pot, comparing, etc.)
-  // ...
+  const warPot = [player1FaceUpCard, player2FaceUpCard];
+
+  for (let i = 0; i < 3; i++) {
+    [player1Hand, player2Hand].forEach((playerHand, index) => {
+      if (playerHand.length > 0) {
+        const card = playerHand.shift();
+        warPot.push(card);
+        warPot.push(playerHand.shift());
+      }
+    });
+  }
+
+  return warPot;
 }
 
 // Display game state
 function displayGameState() {
-  // Update the HTML to display the game state, including player hands, rounds played, wars, etc.
-  // ...
+  // Update player hands
+  const player1HandElement = document.getElementById('playerhand');
+  const player2HandElement = document.getElementById('cpuhand');
+
+  player1HandElement.innerHTML = ''; // Clear the previous content
+  player2HandElement.innerHTML = ''; // Clear the previous content
+
+  for (const card of player1Hand) {
+    const cardElement = document.createElement('div');
+    cardElement.textContent = `${card.value}${card.suit}`;
+    player1HandElement.appendChild(cardElement);
+  }
+
+  for (const card of player2Hand) {
+    const cardElement = document.createElement('div');
+    cardElement.textContent = `${card.value}${card.suit}`;
+    player2HandElement.appendChild(cardElement);
+  }
+
+  // Update rounds played
+  const roundsPlayedElement = document.getElementById('roundsPlayed');
+  roundsPlayedElement.textContent = `Rounds Played: ${roundsPlayed}`;
 }
 
 // Initialize the game
-// ...
+const playButton = document.getElementById('playButton');
+playButton.addEventListener('click', playRound);
