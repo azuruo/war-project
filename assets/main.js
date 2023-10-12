@@ -65,24 +65,19 @@ function dealCards() {
   player1Hand = deck.filter((_, idx) => idx % 2 === 0);
   player2Hand = deck.filter((_, idx) => idx % 2 !== 0);
 }
-
-// Game utility functions
-function disablePlayButton() {
-  document.getElementById('playButton').disabled = true;
-}
-
+// Displays Winner
 function displayWinner(message) {
   document.getElementById('display-winner').textContent = message;
 }
-
+// Determines color of card based on suit
 function getCardColor(card) {
   return ['♠', '♣'].includes(card.suit) ? 'spade' : 'heart';
 }
 
 // War Logic
 
+// Logic for consecutive wars
 function handleConsecutiveWar(warPot) {
-  // Add three more cards to the pot for each player
   for (let i = 0; i < 3; i++) {
     if (player1Hand.length > 0) warPot.push(player1Hand.shift());
     if (player2Hand.length > 0) warPot.push(player2Hand.shift());
@@ -102,6 +97,7 @@ function handleConsecutiveWar(warPot) {
   }
 }
 
+// Initiates war when card values are equal
 function initiateWar(player1InitialCard, player2InitialCard) {
   wars++;
   updateWarCount();
@@ -109,7 +105,6 @@ function initiateWar(player1InitialCard, player2InitialCard) {
   let warPot = [player1InitialCard, player2InitialCard];
   while (true) {
     if (player1Hand.length < 4 || player2Hand.length < 4) {
-      // A player cannot continue the war, so the other player wins
       if (player1Hand.length > player2Hand.length) {
         player1Hand = player1Hand.concat(warPot, player2Hand);
         player2Hand = [];
@@ -119,18 +114,13 @@ function initiateWar(player1InitialCard, player2InitialCard) {
       }
       break;
     }
-
-    // Draw three cards from each player into the pot
     for (let i = 0; i < 3; i++) {
       warPot.push(player1Hand.shift(), player2Hand.shift());
     }
-
     let playerOneCard = player1Hand.shift();
     let playerTwoCard = player2Hand.shift();
     warPot.push(playerOneCard, playerTwoCard);
-
     displayTopCards(playerOneCard, playerTwoCard);
-
     if (getValue(playerOneCard.value) > getValue(playerTwoCard.value)) {
       player1Hand = player1Hand.concat(warPot);
       break;
@@ -140,14 +130,14 @@ function initiateWar(player1InitialCard, player2InitialCard) {
     }
   }
 }
-
+// Updates displayed War Counter after each War
 function updateWarCount() {
   const warCountElement = document.getElementById('war-count');
   if (warCountElement) {
     warCountElement.textContent = `Wars Occurred: ${wars}`;
   }
 }
-
+// Updates displayed Deck Count
 function updatePlayerDeckCounts() {
   const player1DeckCountElement = document.querySelector('.player1-deck');
   const player2DeckCountElement = document.querySelector('.player2-deck');
@@ -155,11 +145,12 @@ function updatePlayerDeckCounts() {
   player1DeckCountElement.textContent = `Deck: ${player1Hand.length}`;
   player2DeckCountElement.textContent = `Deck: ${player2Hand.length}`;
 }
+// Updates displayed rounds played
 function updateRoundsPlayed() {
   const roundsPlayedElement = document.getElementById('rounds-played');
   roundsPlayedElement.textContent = `Rounds Played: ${roundsPlayed}`;
 }
-
+// Checks if winner is determined by the other player running out of cards
 function checkWinCondition() {
   if (player1Hand.length === 0) {
     gameOver = true;
@@ -169,7 +160,7 @@ function checkWinCondition() {
     displayWinner('Player 1 wins!');
   }
 }
-
+// Ends the game and alerts the winner
 function endGame() {
   if (player1Hand.length === 0) {
     alert('Player Two Wins!');
@@ -177,22 +168,19 @@ function endGame() {
     alert('Player One Wins!');
   }
 }
+// Displays the card generated each round
 
 function displayTopCards(playerOneCard, playerTwoCard) {
   const player1HandDiv = document.querySelector('.player1-hand');
   const player2HandDiv = document.querySelector('.player2-hand');
-
-  // Clear previously displayed cards
   player1HandDiv.innerHTML = '';
   player2HandDiv.innerHTML = '';
-
   const card1Element = createCardElement(playerOneCard);
   const card2Element = createCardElement(playerTwoCard);
-
   player1HandDiv.appendChild(card1Element);
   player2HandDiv.appendChild(card2Element);
 }
-
+// Creates a visual representation of a Card using Dom
 function createCardElement(card) {
   const cardElement = document.createElement('div');
   cardElement.classList.add('card', getCardColor(card));
@@ -200,6 +188,7 @@ function createCardElement(card) {
   return cardElement;
 }
 // Main game logic
+// Plays a single round and updates game state each time
 function playRound() {
   if (player1Hand.length === 0 || player2Hand.length === 0) {
     endGame();
@@ -226,7 +215,7 @@ function playRound() {
   updateRoundsPlayed();
   checkWinCondition();
 }
-// Reset Game
+// Resets Game State
 function resetGame() {
   deck = [];
   player1Hand = [];
