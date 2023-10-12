@@ -79,6 +79,8 @@ function getCardColor(card) {
   return ['♠', '♣'].includes(card.suit) ? 'spade' : 'heart';
 }
 
+// War Logic
+
 function handleConsecutiveWar(warPot) {
   // Add three more cards to the pot for each player
   for (let i = 0; i < 3; i++) {
@@ -104,8 +106,39 @@ function initiateWar(player1InitialCard, player2InitialCard) {
   wars++;
   updateWarCount();
 
-  const warPot = [player1InitialCard, player2InitialCard];
-  handleConsecutiveWar(warPot);
+  let warPot = [player1InitialCard, player2InitialCard];
+  while (true) {
+    if (player1Hand.length < 4 || player2Hand.length < 4) {
+      // A player cannot continue the war, so the other player wins
+      if (player1Hand.length > player2Hand.length) {
+        player1Hand = player1Hand.concat(warPot, player2Hand);
+        player2Hand = [];
+      } else {
+        player2Hand = player2Hand.concat(warPot, player1Hand);
+        player1Hand = [];
+      }
+      break;
+    }
+
+    // Draw three cards from each player into the pot
+    for (let i = 0; i < 3; i++) {
+      warPot.push(player1Hand.shift(), player2Hand.shift());
+    }
+
+    let playerOneCard = player1Hand.shift();
+    let playerTwoCard = player2Hand.shift();
+    warPot.push(playerOneCard, playerTwoCard);
+
+    displayTopCards(playerOneCard, playerTwoCard);
+
+    if (getValue(playerOneCard.value) > getValue(playerTwoCard.value)) {
+      player1Hand = player1Hand.concat(warPot);
+      break;
+    } else if (getValue(playerOneCard.value) < getValue(playerTwoCard.value)) {
+      player2Hand = player2Hand.concat(warPot);
+      break;
+    }
+  }
 }
 
 function updateWarCount() {
@@ -144,6 +177,28 @@ function endGame() {
     alert('Player One Wins!');
   }
 }
+
+function displayTopCards(playerOneCard, playerTwoCard) {
+  const player1HandDiv = document.querySelector('.player1-hand');
+  const player2HandDiv = document.querySelector('.player2-hand');
+
+  // Clear previously displayed cards
+  player1HandDiv.innerHTML = '';
+  player2HandDiv.innerHTML = '';
+
+  const card1Element = createCardElement(playerOneCard);
+  const card2Element = createCardElement(playerTwoCard);
+
+  player1HandDiv.appendChild(card1Element);
+  player2HandDiv.appendChild(card2Element);
+}
+
+function createCardElement(card) {
+  const cardElement = document.createElement('div');
+  cardElement.classList.add('card', getCardColor(card));
+  cardElement.textContent = `${card.value} ${card.suit}`;
+  return cardElement;
+}
 // Main game logic
 function playRound() {
   if (player1Hand.length === 0 || player2Hand.length === 0) {
@@ -153,6 +208,8 @@ function playRound() {
 
   let playerOneCard = player1Hand.shift();
   let playerTwoCard = player2Hand.shift();
+
+  displayTopCards(playerOneCard, playerTwoCard);
 
   const playerOneCardValue = getValue(playerOneCard.value);
   const playerTwoCardValue = getValue(playerTwoCard.value);
