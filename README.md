@@ -2,7 +2,7 @@
 
 #### Game Description
 
-###### This is a game of War. War is a simple game where two players each receive half of a normal deck of cards, and reveal the top card in each of their decks. Whoevers card value is highest takes both cards and adds them to their deck. However, if both players cards are the same value then it is war. During a war scenario, 3 cards are taken from each players deck and the final card is compared. The higher value in this situation would be determined as the winner and that player receives all the cards. The game ends when one player has completely run out of cards or is unable to participate in a war due to lack of cards.
+This is a game of War. War is a simple game where two players each receive half of a normal deck of cards, and reveal the top card in each of their decks. Whoevers card value is highest takes both cards and adds them to their deck. However, if both players cards are the same value then it is war. During a war scenario, 3 cards are taken from each players deck and the final card is compared. The higher value in this situation would be determined as the winner and that player receives all the cards. The game ends when one player has completely run out of cards or is unable to participate in a war due to lack of cards.
 
 ## Screenshots of game
 
