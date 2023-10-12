@@ -1,49 +1,183 @@
-/* Shared styles for player and CPU elements */
-#playerdeck,
-#cpudeck,
-#playerpile,
-#cpupile {
-  width: 200px;
-  height: 300px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+/* Player 1 Styles */
+.player1 {
+  display: inline-block;
+  vertical-align: top;
+  margin: 10px;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  width: 220px;
+  text-align: center;
 }
 
-#profilepicture,
-#cpuprofilepicture {
+.player1-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.player1-deck {
+  background-color: #333;
+  color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.player1-profile-picture {
   width: 100px;
   height: 100px;
+  background-color: #ddd;
   border: 1px solid #ccc;
-  border-radius: 10px;
+  border-radius: 50%;
+  line-height: 100px;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0 auto;
+  margin-bottom: 10px;
 }
 
-#playButton {
-  color: blue;
+.player1-hand {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-/* Player-specific styles */
-#playertitle {
-  color: blue;
+/* Player 2 Styles */
+.player2 {
+  display: inline-block;
+  vertical-align: top;
+  margin: 10px;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  width: 220px;
+  text-align: center;
 }
 
-#playerdeck,
-#profilepicture,
-#playerpile {
-  background-color: blue;
+.player2-title {
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-/* CPU-specific styles */
-#cputitle {
-  color: green;
+.player2-deck {
+  background-color: #333;
+  color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
 }
 
-#cpudeck,
-#cpuprofilepicture,
-#cpupile {
-  background-color: green;
+.player2-profile-picture {
+  width: 100px;
+  height: 100px;
+  background-color: #ddd;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  line-height: 100px;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0 auto;
+  margin-bottom: 10px;
 }
 
-/* Body styles */
+.player2-hand {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Game Board and Display Winner Styles */
+#game-board {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#display-winner {
+  font-weight: bold;
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+/* Play Button Styles */
+.play-btn {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.play-btn:hover {
+  background-color: #0056b3;
+}
+/* card styles */
+.card {
+  display: inline-block;
+  margin: 3px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+.card.slide {
+  transform: translateY(-20px);
+}
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-2px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-1px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(1px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+.heart,
+.diamond {
+  color: red;
+}
+.spade,
+.club {
+  color: black;
+}
+/* Body Styles */
 body {
-  background-color: darkgrey;
+  background-color: #333;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  text-align: center;
 }

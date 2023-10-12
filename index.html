@@ -9,18 +9,33 @@
   </head>
   <body>
     <header>War</header>
-    <section class="players">
-        <div id="game-board"></div>
-        <div id="playertitle">Player</div>
-        <div id="playerdeck">26</div>
-        <div id="profilepicture">PLAYER</div>
-        <div id="playerhand"></div>
-        <div id="cputitle">CPU</div>
-        <div id="cpudeck">26</div>
-        <div id="cpuprofilepicture">CPU</div>
-        <div id="cpuhand"></div>
-        <div id="displaywinner"></div>
+    <!-- Player 1 -->
+    <div class="player1">
+        <div class="player1-title">Player 1</div>
+        <div class="player1-deck">26</div>
+        <div class="player1-profile-picture">PLAYER</div>
+        <div class="player1-hand"></div>
+      </div>
+  
+      <!-- Player 2 -->
+      <div class="player2">
+        <div class="player2-title">Player 2</div>
+        <div class="player2-deck">26</div>
+        <div class="player2-profile-picture">PLAYER</div>
+        <div class="player2-hand"></div>
+      </div>
+  
+      <!-- Game board or other elements -->
+      <div id="game-board"></div>
+      <div id="display-winner"></div>
+      <div id="rounds-played">Rounds Played: 0</div>
+      <div id="wars-count">Wars: 0</div>
+
     </section>
-    <button class="playbtn" id="playButton">Play</button>
+  
+    <!-- Play button -->
+    <button class="play-btn" id="playButton">Play</button>
+    <button id="resetButton">Reset Game</button>
+
   </body>
 </html>
